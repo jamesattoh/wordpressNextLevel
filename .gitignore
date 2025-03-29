@@ -1,0 +1,17 @@
+# Ignorer tout par défaut
+*
+
+# Ne pas ignorer les fichiers et dossiers nécessaires pour Git
+!.gitignore
+
+# Ne pas ignorer le dossier wp-content/themes/bricotips
+!wp-content/
+wp-content/*
+!wp-content/themes/
+wp-content/themes/*
+!wp-content/themes/bricotips/
+
+# Ignorer tout le contenu du dossier bricotips sauf les fichiers que vous modifiez
+wp-content/themes/bricotips/*.log
+wp-content/themes/bricotips/node_modules/
+wp-content/themes/bricotips/vendor/
