@@ -11,6 +11,10 @@ wp-content/*
 wp-content/themes/*
 !wp-content/themes/bricotips/
 
+# Ne pas ignorer tous les fichiers dans bricotips
+!wp-content/themes/bricotips/**
+!wp-content/themes/bricotips/*
+
 # Ignorer tout le contenu du dossier bricotips sauf les fichiers que vous modifiez
 wp-content/themes/bricotips/*.log
 wp-content/themes/bricotips/node_modules/
