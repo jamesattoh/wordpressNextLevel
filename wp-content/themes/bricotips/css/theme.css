@@ -16,3 +16,31 @@ p {
    transition: all 0.33s ease-in-out;
    transform: scale(1.05) translateY(-10px);
 }
+
+/* HEADER */
+
+
+#site-header.sticky-top {
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    background-color: #C8D6CF;
+}
+
+
+/* LIENS DU MENU */ 
+li.menu-item a {
+    color: #313332 !important; /* avec !important on donne une priorité maximale à une ce style*/
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: #F4CA52;
+    border-radius: 10px;
+    text-align: center;
+}
+
+li.menu-item a:hover,
+li.menu-item.current-menu-item a {
+    color: #F4CA52 !important;
+    background-color: #313332;
+    text-decoration: none !important;
+}
