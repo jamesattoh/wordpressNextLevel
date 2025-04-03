@@ -70,3 +70,27 @@ function banniere_titre_func($atts)
 
     return $output;
 }
+
+/* HOOK FILTERS */
+
+//on prend en compte ici la page de chaque outil
+function the_title_filter($title)
+{
+
+    if (is_single() && in_category('outils') && in_the_loop()) {
+        return 'Outil : ' . $title;
+    }
+
+    return $title;
+}
+add_filter('the_title', 'the_title_filter');
+
+
+//on prend en compte ici la page d'archives
+add_filter( 'get_the_archive_title', function ($title) {
+    if ( is_category() ) {
+		$title = "Liste des " . strtolower(single_cat_title( '', false ));
+	}
+ 
+	return $title;
+} );
