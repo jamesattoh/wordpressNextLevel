@@ -77,7 +77,7 @@ function banniere_titre_func($atts)
 function the_title_filter($title)
 {
 
-    if (is_single() && in_category('outils') && in_the_loop()) {
+    if (is_single() && in_category('outils') && in_the_loop()) { //is_single() : Vérifie que la page en cours est un article individuel, et in_the_loop() : S'assure que le code est exécuté dans la boucle WordPress (généralement le corps de page)
         return 'Outil : ' . $title;
     }
 
@@ -87,10 +87,42 @@ add_filter('the_title', 'the_title_filter');
 
 
 //on prend en compte ici la page d'archives
-add_filter( 'get_the_archive_title', function ($title) {
-    if ( is_category() ) {
-		$title = "Liste des " . strtolower(single_cat_title( '', false ));
-	}
- 
-	return $title;
-} );
+add_filter('get_the_archive_title', function ($title) {
+    if (is_category()) {
+        $title = "Liste des " . strtolower(single_cat_title('', false));
+    }
+
+    return $title;
+});
+
+//on personnalise le titre d’un article et de la page d’archive
+function the_category_filter($categories)
+{
+    return str_replace("Outils", "Tous les outils", $categories);
+}
+
+add_filter('the_category', 'the_category_filter');
+
+
+//on ajoute le titre "Description" a la zone de contenu de la page de détail d’un outil
+function the_content_filter($content)
+{
+    if (is_single() && in_category('outils')) {
+        return '<hr><h2>Description</h2>' . $content;
+    }
+    return $content;
+}
+
+add_filter('the_content', 'the_content_filter');
+
+
+//on ajoute ici un bouton pour accéder au détail d’un outil
+function the_excerpt_filter($content)
+{
+    if (is_archive()) {
+        return $content . "<div class='more-excerpt'><a href='" . get_the_permalink() . "'>En savoir plus sur l'outil</a></div>"; //get_the_permalink() utilisé en lien href permet de générer le lien WordPress de la page de détail de l’article courant dans lequel on affiche l’excerpt.
+    }
+    return $content;
+}
+
+add_filter('the_excerpt', 'the_excerpt_filter');

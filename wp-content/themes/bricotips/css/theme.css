@@ -161,3 +161,18 @@ li.menu-item.current-menu-item a {
     display: block;
     background: #F4CA52;
 }
+
+
+
+/* Bouton Archives EN SAVOIR PLUS */
+.more-excerpt{
+    text-align: center;
+ }
+ .more-excerpt a{
+    display: inline-block;
+    padding: 10px 25px;
+    color: #313332;
+    background-color: #F4CA52;
+    text-decoration: none;
+    border-radius: 10px;
+ }
