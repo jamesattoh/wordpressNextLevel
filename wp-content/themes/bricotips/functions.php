@@ -126,3 +126,41 @@ function the_excerpt_filter($content)
 }
 
 add_filter('the_excerpt', 'the_excerpt_filter');
+
+
+/* HOOKS ACTIONS */
+
+//on affiche une bannière a la fin de la page archives
+function loop_end_action()
+{
+    if (is_archive()):
+        ?>
+        <p class="after-loop">
+            <?php
+                echo do_shortcode('[banniere-titre src="http://localhost/bricotips/wp-content/uploads/2025/03/banniere-image.webp" titre="BricoTips"]');
+            ?>
+        </p>
+        <?php
+   endif;
+}
+
+add_action('loop_end', 'loop_end_action');
+
+
+
+//on affiche un texte d'intro au début de la page archives
+$shown = false; //cette variables est definie en dehors des fonctions
+
+function bricotips_intro_section_action()
+{
+    global $shown; //donc pour la manipuler cette variable, elle doit etre declaree comme globale
+    if (is_archive() && !$shown):
+        ?>
+        <p class="intro">Vous trouverez dans cette page la liste de tous les outils que nous avons référencée pour le
+            moment. La liste n'est pas exhaustive, mais s'enrichira au fur et à mesure.</p>
+    <?php
+        $shown = true; //lors des appels suivants, $shown est déjà true, donc le texte n'est plus affiché
+    endif;
+}
+
+add_action('bricotips_intro_section', 'bricotips_intro_section_action');
