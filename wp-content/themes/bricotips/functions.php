@@ -61,7 +61,7 @@ function banniere_titre_func($atts)
             <h2 class="titre"><?= $atts['titre'] ?></h2>
         </div>
 
-<?php
+    <?php
     }
 
     //J'arrête de récupérer le flux d'information et le stock dans la fonction $output
@@ -71,7 +71,12 @@ function banniere_titre_func($atts)
     return $output;
 }
 
+
+
 /* HOOK FILTERS */
+
+
+
 
 //on prend en compte ici la page de chaque outil
 function the_title_filter($title)
@@ -128,20 +133,34 @@ function the_excerpt_filter($content)
 add_filter('the_excerpt', 'the_excerpt_filter');
 
 
+function paginate_links_filter($r)
+{
+    return "Pages :" . $r;
+}
+
+add_filter('paginate_links_output', 'paginate_links_filter');
+
+
+
+
+
 /* HOOKS ACTIONS */
+
+
+
 
 //on affiche une bannière a la fin de la page archives
 function loop_end_action()
 {
     if (is_archive()):
-        ?>
+    ?>
         <p class="after-loop">
             <?php
-                echo do_shortcode('[banniere-titre src="http://localhost/bricotips/wp-content/uploads/2025/03/banniere-image.webp" titre="BricoTips"]');
+            echo do_shortcode('[banniere-titre src="http://localhost/bricotips/wp-content/uploads/2025/03/banniere-image.webp" titre="BricoTips"]');
             ?>
         </p>
-        <?php
-   endif;
+    <?php
+    endif;
 }
 
 add_action('loop_end', 'loop_end_action');
@@ -155,10 +174,10 @@ function bricotips_intro_section_action()
 {
     global $shown; //donc pour la manipuler cette variable, elle doit etre declaree comme globale
     if (is_archive() && !$shown):
-        ?>
+    ?>
         <p class="intro">Vous trouverez dans cette page la liste de tous les outils que nous avons référencée pour le
             moment. La liste n'est pas exhaustive, mais s'enrichira au fur et à mesure.</p>
-    <?php
+<?php
         $shown = true; //lors des appels suivants, $shown est déjà true, donc le texte n'est plus affiché
     endif;
 }
