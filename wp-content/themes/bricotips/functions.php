@@ -68,7 +68,7 @@ function banniere_titre_func($atts)
     $output = ob_get_contents();
     ob_end_clean(); //Je nettoie le flux pour une bonne utilisation
 
-    return $output;
+    return $output; //pour générer un shortcode il faut nécessairement retourner le html du shortcode sous forme de texte
 }
 
 
@@ -182,4 +182,4 @@ function bricotips_intro_section_action()
     endif;
 }
 
-add_action('bricotips_intro_section', 'bricotips_intro_section_action');
+add_action('bricotips_intro_section', 'bricotips_intro_section_action')
