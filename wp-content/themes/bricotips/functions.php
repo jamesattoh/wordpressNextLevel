@@ -134,8 +134,10 @@ add_filter('the_excerpt', 'the_excerpt_filter');
 
 
 function paginate_links_filter($r)
-{
-    return "Pages :" . $r;
+{   
+    //error_log("$r"); //pour afficher dans le fichier debug.log (situé dans wp-contents) une piste pour l'erreur ci-bas
+    return "Pages :".$r;
+    //return "Pages :" + $r; //l'erreur est le "+" utilisé alors qu'il s'agit de concatenation de chaînes de carac
 }
 
 add_filter('paginate_links_output', 'paginate_links_filter');
@@ -182,4 +184,4 @@ function bricotips_intro_section_action()
     endif;
 }
 
-add_action('bricotips_intro_section', 'bricotips_intro_section_action')
+add_action('bricotips_intro_section', 'bricotips_intro_section_action');//l'erreur etait le ";" omis sur cette ligne
