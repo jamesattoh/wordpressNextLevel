@@ -134,9 +134,9 @@ add_filter('the_excerpt', 'the_excerpt_filter');
 
 
 function paginate_links_filter($r)
-{   
+{
     //error_log("$r"); //pour afficher dans le fichier debug.log (situé dans wp-contents) une piste pour l'erreur ci-bas
-    return "Pages :".$r;
+    return "Pages :" . $r;
     //return "Pages :" + $r; //l'erreur est le "+" utilisé alors qu'il s'agit de concatenation de chaînes de carac
 }
 
@@ -184,4 +184,13 @@ function bricotips_intro_section_action()
     endif;
 }
 
-add_action('bricotips_intro_section', 'bricotips_intro_section_action');//l'erreur etait le ";" omis sur cette ligne
+add_action('bricotips_intro_section', 'bricotips_intro_section_action'); //l'erreur etait le ";" omis sur cette ligne
+
+// passer en mode maintenance si l'utilisateur n'est pas un administrateur du site
+function maintenace_mode()
+{
+    if (!current_user_can('administrator')) {
+        wp_die('Maintenance.');
+    }
+}
+add_action('get_header', 'maintenace_mode');
